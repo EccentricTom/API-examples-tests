@@ -1,11 +1,12 @@
 # script that gets data from the web as a csv file and loads it into a database
 
+import os
 from pathlib import Path
 
 import pandas as pd
 import requests
 from sqlalchemy import create_engine
-import os
+
 
 # Function to download a selection of CSV files from the web
 def download_csv(url:str) -> str:

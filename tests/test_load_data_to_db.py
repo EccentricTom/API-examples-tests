@@ -1,7 +1,8 @@
 """Test suite for loading data into the database."""
-import pytest
 import pandas as pd
+import pytest
 from sqlalchemy import create_engine, text
+
 from data.load_data_to_db import load_csv_to_dataframe, load_dataframe_to_db
 
 
