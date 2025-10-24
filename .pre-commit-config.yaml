@@ -5,4 +5,4 @@ repos:
     # Ensure that uv.lock is up to date
     -   id: uv-lock
     # Export dependencies to requirements.txt
-#
+    -  id: uv-export
