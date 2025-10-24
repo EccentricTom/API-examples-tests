@@ -31,6 +31,5 @@ def test_get_data(client):
     assert len(data) == 2011, "There should be 2011 records in the 'water_potability' table"
     assert data[0]["ph"] == 8.316765884214679, "First record's 'ph' value does not match"
 
-
 if __name__ == "__main__":
     pytest.main()
