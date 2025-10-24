@@ -5,4 +5,9 @@ repos:
     # Ensure that uv.lock is up to date
     -   id: uv-lock
     # Export dependencies to requirements.txt
-    -  id: uv-export
+    -   id: uv-export
+-   repo: https://github.com/astral-sh/ruff-pre-commit 
+    rev: v0.14.2
+    hooks:
+    -   id: ruff-check
+    -   id: ruff-format
