@@ -6,4 +6,4 @@ repos:
     -   id: uv-lock
     # Export dependencies to requirements.txt
     -   id: uv-export
-        args: [--requirements, --no-header, --no-hashes, --no-annotate, requirements.txt]
+        args: [--no-header, --no-hashes, --no-annotate, requirements.txt]
