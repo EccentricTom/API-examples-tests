@@ -1,6 +1,10 @@
-# script that gets data from the web as a csv file and loads it into a database
+"""
+Helpers for loading data into a database.
 
-import os
+Download CSV files, load them into pandas DataFrames, 
+and stores them in a database.
+"""
+
 from pathlib import Path
 
 import pandas as pd
@@ -18,6 +22,7 @@ def download_csv(url:str) -> str:
 
     Returns:
         str: The filename of the downloaded CSV file.
+
     """
     # Download the file from the URL
     response = requests.get(url, allow_redirects=True)

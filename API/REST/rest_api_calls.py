@@ -1,9 +1,9 @@
 """Fetch data from the sqlite database using REST API calls."""
 
 import fastapi
-from sqlalchemy import create_engine, text
-import uvicorn
 import pandas as pd
+import uvicorn
+from sqlalchemy import create_engine, text
 
 app = fastapi.FastAPI(title="Database REST API", version="0.1")
 db_connection_string = "sqlite:///data/data.db"
@@ -18,6 +18,7 @@ def get_data(table_name: str):
 
     Returns:
         list: A list of records from the specified table.
+
     """
     engine = create_engine(db_connection_string)
     with engine.connect() as connection:
@@ -32,6 +33,7 @@ def list_tables():
 
     Returns:
         list: A list of table names.
+        
     """
     engine = create_engine(db_connection_string)
     with engine.connect() as connection:

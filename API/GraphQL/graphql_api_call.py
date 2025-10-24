@@ -7,6 +7,7 @@ db_connection_string = "sqlite:///data/data.db"
 
 class RecordType(graphene.ObjectType):
     """GraphQL type for a database record."""
+
     # Dynamically define fields based on the table structure
     pass
 
