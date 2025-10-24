@@ -1,7 +1,6 @@
 """Test the REST API calls."""
 
 import pytest
-import requests
 from fastapi.testclient import TestClient
 
 from API.REST import rest_api_calls
