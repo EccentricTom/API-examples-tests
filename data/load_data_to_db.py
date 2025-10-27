@@ -49,6 +49,23 @@ def load_csv_to_dataframe(file_path: str) -> pd.DataFrame:
     df.dropna(inplace=True)
     return df
 
+# Function to normalise column names
+def normalise_column_names(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Normalise DataFrame column names to lowercase with underscores. Also removes
+    redundant parentheses and leading/trailing spaces.
+    
+    Args:
+        df (pd.DataFrame): The DataFrame to normalise.
+
+    Returns:
+        pd.DataFrame: The DataFrame with normalised column names.
+
+    """
+    df.columns = [col.replace("(", "").replace(")", "") for col in df.columns]
+    df.columns = [col.strip().lower().replace(" ", "_") for col in df.columns]
+    return df
+
 # Function to load a DataFrame into a database
 def load_dataframe_to_db(df: pd.DataFrame, table_name: str,
                           db_connection_string: str) -> None:
@@ -75,5 +92,6 @@ if __name__ == "__main__":
     for csv_url in csv_urls:
         file_name = download_csv(csv_url)
         df = load_csv_to_dataframe(file_name)
+        df = normalise_column_names(df)
         load_dataframe_to_db(df, table_name=file_name.split(".")[0],
                              db_connection_string="sqlite:///data/data.db")
