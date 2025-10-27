@@ -30,5 +30,14 @@ def test_get_data(client):
     assert len(data) == 2011, "There should be 2011 records in the 'water_potability' table"
     assert data[0]["ph"] == 8.316765884214679, "First record's 'ph' value does not match"
 
+def test_get_column_data(client):
+    """Test the /data/{table_name}/{column_name} endpoint."""
+    response = client.get("/data/train/address")
+    assert response.status_code == 200
+    column_data = response.json()
+    assert isinstance(column_data, list), "Response should be a list of column values"
+    assert len(column_data) == 29451, "There should be 891 records in the 'age' column of 'train' table"
+    assert column_data[0] == "Ksfc Layout,Bangalore", "First record's 'age' value does not match"
+
 if __name__ == "__main__":
     pytest.main()

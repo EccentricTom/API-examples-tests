@@ -43,5 +43,26 @@ def list_tables():
         tables = [row[0] for row in result.fetchall()]
     return tables
 
+@app.get("/data/{table_name}/{column_name}")
+def get_column_data(table_name: str, column_name: str):
+    """
+    Fetch data from a specific column in the specified table.
+
+    Args:
+        table_name (str): The name of the table.
+        column_name (str): The name of the column.
+
+    Returns:
+        list: A list of values from the specified column.
+
+    """
+    engine = create_engine(db_connection_string)
+    with engine.connect() as connection:
+        df = pd.read_sql_table(table_name, con=connection)
+        if column_name not in df.columns:
+            return {"error": f"Column '{column_name}' does not exist in table '{table_name}'."}
+        column_data = df[column_name].tolist()
+    return column_data
+
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
