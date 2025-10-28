@@ -43,7 +43,7 @@ def list_tables():
         tables = [row[0] for row in result.fetchall()]
     return tables
 
-@app.get("/data/{table_name}/{column_name}")
+@app.get("/data/{table_name}/select/{column_name}")
 def get_column_data(table_name: str, column_name: str):
     """
     Fetch data from a specific column in the specified table.
@@ -63,6 +63,23 @@ def get_column_data(table_name: str, column_name: str):
             return {"error": f"Column '{column_name}' does not exist in table '{table_name}'."}
         column_data = df[column_name].tolist()
     return column_data
+
+@app.get("/data/{table_name}/count")
+def get_record_count(table_name: str):
+    """
+    Get the count of records in the specified table.
+
+    Args:
+        table_name (str): The name of the table.
+    Returns:
+        int: The count of records in the table.
+
+    """
+    engine = create_engine(db_connection_string)
+    with engine.connect() as connection:
+        df = pd.read_sql_table(table_name, con=connection)
+        record_count = len(df)
+    return record_count
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
